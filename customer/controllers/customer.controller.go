@@ -11,7 +11,7 @@ type CustomerController struct {
 	CustomerService services.CustomerService
 }
 
-func (cc *CustomerController) GetCustomer(httpRequest interfaces.HttpRequest) interfaces.HttpResponse {
+func (cc *CustomerController) GetCustomers(httpRequest interfaces.HttpRequest) interfaces.HttpResponse {
 	customers, err := cc.CustomerService.GetCustomers()
 	if err != nil {
 		return interfaces.HttpResponse{StausCode: 500, Body: interfaces.Error{Message: "Failed to get customers"}}

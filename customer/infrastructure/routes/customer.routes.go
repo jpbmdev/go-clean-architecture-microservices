@@ -12,7 +12,7 @@ func AddCustomerRoutesToApp(app *fiber.App) {
 	service := services.CreateCustomerService()
 	controller := controllers.CustomerController{CustomerService: service}
 
-	app.Get("/customer", adapters.FiberAdapter(controller.GetCustomer))
+	app.Get("/customer", adapters.FiberAdapter(controller.GetCustomers))
 
 	app.Post("/customer", adapters.FiberAdapter(controller.CreateCustomer))
 }
