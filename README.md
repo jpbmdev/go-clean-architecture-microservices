@@ -1,4 +1,5 @@
 # go-clean-architecture-microservices
 
-## Adaptation of the following tutorial
-https://www.youtube.com/playlist?list=PLaLqLOj2bk9ZV2RhqXzABUP5QSg42uJEs
+# generate swagger docs
+
+`swag init -g infrastructure/docs/customer.docs.go controllers/customer.controller.go`

@@ -11,6 +11,14 @@ type CustomerController struct {
 	CustomerService services.CustomerService
 }
 
+// @Summary Get Customer
+// @Description Get the list of customers
+// @Tags Customers
+// @ID get-customer-by-id
+// @Accept json
+// @Produce json
+// @Success 200 {object} domain.CustomerEntity
+// @Router /customer [get]
 func (cc *CustomerController) GetCustomers(httpRequest interfaces.HttpRequest) interfaces.HttpResponse {
 	customers, err := cc.CustomerService.GetCustomers()
 	if err != nil {
@@ -20,6 +28,15 @@ func (cc *CustomerController) GetCustomers(httpRequest interfaces.HttpRequest) i
 	return interfaces.HttpResponse{StausCode: 200, Body: customers}
 }
 
+// @Summary Create a customer
+// @Description Create a new customer with the provided name.
+// @Tags Customers
+// @ID create-customer
+// @Accept json
+// @Produce json
+// @Param request body domain.CreateCustomerDto true "Customer details to create"
+// @Success 201 {object} domain.CustomerEntity
+// @Router /customer [post]
 func (cc *CustomerController) CreateCustomer(httpRequest interfaces.HttpRequest) interfaces.HttpResponse {
 
 	var customerDto domain.CreateCustomerDto
@@ -33,5 +50,5 @@ func (cc *CustomerController) CreateCustomer(httpRequest interfaces.HttpRequest)
 		return interfaces.HttpResponse{StausCode: 500, Body: interfaces.Error{Message: "Failed to create Customer"}}
 	}
 
-	return interfaces.HttpResponse{StausCode: 200, Body: customer}
+	return interfaces.HttpResponse{StausCode: 201, Body: customer}
 }

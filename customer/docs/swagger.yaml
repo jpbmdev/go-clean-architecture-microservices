@@ -1,0 +1,66 @@
+definitions:
+  domain.CreateCustomerDto:
+    properties:
+      name:
+        type: string
+    type: object
+  domain.CustomerEntity:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is test with clean architecture
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /customer:
+    get:
+      consumes:
+      - application/json
+      description: Get the list of customers
+      operationId: get-customer-by-id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.CustomerEntity'
+      summary: Get Customer
+      tags:
+      - Customers
+    post:
+      consumes:
+      - application/json
+      description: Create a new customer with the provided name.
+      operationId: create-customer
+      parameters:
+      - description: Customer details to create
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateCustomerDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.CustomerEntity'
+      summary: Create a customer
+      tags:
+      - Customers
+swagger: "2.0"

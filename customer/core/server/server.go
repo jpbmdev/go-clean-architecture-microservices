@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"go-clean-architecture-mircroservices_customer/core/database"
+	"go-clean-architecture-mircroservices_customer/infrastructure/docs"
 	"go-clean-architecture-mircroservices_customer/infrastructure/models"
 	"go-clean-architecture-mircroservices_customer/infrastructure/routes"
 
@@ -24,6 +25,8 @@ func (s *Server) Initialize(port string) {
 	s.app = fiber.New()
 
 	routes.AddCustomerRoutesToApp(s.app)
+
+	docs.GenerateDocsRoute(s.app)
 }
 
 func (s *Server) Listen() {
