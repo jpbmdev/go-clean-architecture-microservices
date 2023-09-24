@@ -78,6 +78,18 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/domain.CustomerEntity"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/interfaces.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/interfaces.Error"
+                        }
                     }
                 }
             }
@@ -86,19 +98,65 @@ const docTemplate = `{
     "definitions": {
         "domain.CreateCustomerDto": {
             "type": "object",
+            "required": [
+                "age",
+                "email",
+                "first_name",
+                "last_name",
+                "score"
+            ],
             "properties": {
-                "name": {
+                "age": {
+                    "type": "integer"
+                },
+                "email": {
                     "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "integer"
                 }
             }
         },
         "domain.CustomerEntity": {
             "type": "object",
+            "required": [
+                "age",
+                "email",
+                "first_name",
+                "last_name",
+                "score"
+            ],
             "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },
-                "name": {
+                "last_name": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "integer"
+                }
+            }
+        },
+        "interfaces.Error": {
+            "type": "object",
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             }

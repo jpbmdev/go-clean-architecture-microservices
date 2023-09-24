@@ -36,6 +36,8 @@ func (cc *CustomerController) GetCustomers(httpRequest interfaces.HttpRequest) i
 // @Produce json
 // @Param request body domain.CreateCustomerDto true "Customer details to create"
 // @Success 201 {object} domain.CustomerEntity
+// @Failure 400 {object} interfaces.Error
+// @Failure 500 {object} interfaces.Error
 // @Router /customer [post]
 func (cc *CustomerController) CreateCustomer(httpRequest interfaces.HttpRequest) interfaces.HttpResponse {
 
@@ -43,6 +45,10 @@ func (cc *CustomerController) CreateCustomer(httpRequest interfaces.HttpRequest)
 
 	if err := json.Unmarshal(httpRequest.Body, &customerDto); err != nil {
 		return interfaces.HttpResponse{StausCode: 400, Body: interfaces.Error{Message: "Invalid body"}}
+	}
+
+	if errMsg := domain.ValidateCreateCustomerDto(&customerDto); errMsg != "" {
+		return interfaces.HttpResponse{StausCode: 400, Body: interfaces.Error{Message: errMsg}}
 	}
 
 	customer, err := cc.CustomerService.CreateCustomer(customerDto)

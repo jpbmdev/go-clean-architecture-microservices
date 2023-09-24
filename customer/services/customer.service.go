@@ -29,8 +29,12 @@ func (s *customerService) GetCustomers() ([]domain.CustomerEntity, error) {
 
 	for _, value := range models {
 		customers = append(customers, domain.CustomerEntity{
-			Id:   value.Id,
-			Name: value.Name,
+			Id:        value.Id,
+			FirstName: value.FirstName,
+			LastName:  value.LastName,
+			Email:     value.Email,
+			Age:       value.Age,
+			Score:     value.Score,
 		})
 	}
 
@@ -39,7 +43,11 @@ func (s *customerService) GetCustomers() ([]domain.CustomerEntity, error) {
 
 func (s *customerService) CreateCustomer(customerDto domain.CreateCustomerDto) (domain.CustomerEntity, error) {
 	model := models.CustomerModel{
-		Name: customerDto.Name,
+		FirstName: customerDto.FirstName,
+		LastName:  customerDto.LastName,
+		Email:     customerDto.Email,
+		Age:       customerDto.Age,
+		Score:     customerDto.Score,
 	}
 	createdUser := domain.CustomerEntity{}
 
@@ -51,7 +59,11 @@ func (s *customerService) CreateCustomer(customerDto domain.CreateCustomerDto) (
 	fmt.Print(model)
 
 	return domain.CustomerEntity{
-		Id:   model.Id,
-		Name: model.Name,
+		Id:        model.Id,
+		FirstName: model.FirstName,
+		LastName:  model.LastName,
+		Email:     model.Email,
+		Age:       model.Age,
+		Score:     model.Score,
 	}, nil
 }
