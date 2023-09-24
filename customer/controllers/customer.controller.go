@@ -8,7 +8,7 @@ import (
 )
 
 type CustomerController struct {
-	CustomerService services.CustomerService
+	Service services.CustomerService
 }
 
 // @Summary Get Customer
@@ -18,9 +18,10 @@ type CustomerController struct {
 // @Accept json
 // @Produce json
 // @Success 200 {object} domain.CustomerEntity
+// @Failure 500 {object} interfaces.Error
 // @Router /customer [get]
 func (cc *CustomerController) GetCustomers(httpRequest interfaces.HttpRequest) interfaces.HttpResponse {
-	customers, err := cc.CustomerService.GetCustomers()
+	customers, err := cc.Service.GetCustomers()
 	if err != nil {
 		return interfaces.HttpResponse{StausCode: 500, Body: interfaces.Error{Message: "Failed to get customers"}}
 	}
@@ -51,7 +52,7 @@ func (cc *CustomerController) CreateCustomer(httpRequest interfaces.HttpRequest)
 		return interfaces.HttpResponse{StausCode: 400, Body: interfaces.Error{Message: errMsg}}
 	}
 
-	customer, err := cc.CustomerService.CreateCustomer(customerDto)
+	customer, err := cc.Service.CreateCustomer(customerDto)
 	if err != nil {
 		return interfaces.HttpResponse{StausCode: 500, Body: interfaces.Error{Message: "Failed to create Customer"}}
 	}
